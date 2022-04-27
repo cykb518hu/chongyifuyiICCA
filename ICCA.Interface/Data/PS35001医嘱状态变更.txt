@@ -1,0 +1,45 @@
+<ESBEntry>
+   <AccessControl>
+      <UserName>HIS</UserName>
+      <Password>123456</Password>
+      <Fid>PS35001</Fid>
+      <OrderNo>PS35001S13001</OrderNo>
+      <SysFlag>1</SysFlag>
+   </AccessControl>
+   <MessageHeader>
+      <Fid>PS35001</Fid>
+      <OrderNo>PS35001S13001</OrderNo>
+      <SourceSysCode>S01</SourceSysCode>
+      <TargetSysCode>S13</TargetSysCode>
+      <HospCode>GH01</HospCode>
+      <ReturnFlag>-1</ReturnFlag>
+      <MsgDate>2022-02-28 16:12:44</MsgDate>
+   </MessageHeader>
+   <MsgInfo>
+      <Msg id="1" lastUpdate ="2022-02-28 16:12:44" action="insert">
+			<UPDATEORDERSRT>
+				<PATPATIENTID>0000000045</PATPATIENTID>
+				<PAADMVISITNUMBER>51</PAADMVISITNUMBER>
+				<OEORIINFOLIST>
+					<DETAIL>
+						<OEORIORDERITEMID>37||1</OEORIORDERITEMID>
+						<OEORISTATUSCODE>D</OEORISTATUSCODE>
+						<OEORIORDSUBCATCODE>一般医疗服务</OEORIORDSUBCATCODE>
+						<OEORIORDSUBCATDESC>一般医疗服务</OEORIORDSUBCATDESC>
+						<OEORIORDCATCODE>诊察</OEORIORDCATCODE>
+						<OEORIORDCATDESC>诊察</OEORIORDCATDESC>
+						<OEORIPARENTORDERID/>
+						<OEORIENTERDEPTCODE>BBMZ020</OEORIENTERDEPTCODE>
+						<OEORIENTERDEPTDESC>内分泌内科门诊</OEORIENTERDEPTDESC>
+						<OEORIEXECDEPTCODE>BBMZ020</OEORIEXECDEPTCODE>
+						<OEORIEXECDEPTDESC>内分泌内科门诊</OEORIEXECDEPTDESC>
+					</DETAIL>
+				</OEORIINFOLIST>
+				<UPDATEUSERCODE>demo</UPDATEUSERCODE>
+				<UPDATEUSERDESC>demo</UPDATEUSERDESC>
+				<UPDATEDATE>2022-02-28</UPDATEDATE>
+				<UPDATETIME>15:10:11</UPDATETIME>
+			</UPDATEORDERSRT>
+      </Msg>
+   </MsgInfo>
+</ESBEntry>

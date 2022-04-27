@@ -1,0 +1,91 @@
+USE [BrokerCacheDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetOrderCalculate]    Script Date: 21/4/2022 下午3:04:46 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetPatientDrugList] 
+  @patientNo		varchar(64) = null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+
+DECLARE  @hours int
+set @hours=  dateName(hh,GETDATE()) --获取小时
+--SELECT @hours
+DECLARE @startTime varchar(50)
+Declare @endTime varchar(50)
+
+if @hours>=8 and @hours<17
+  begin
+    set @startTime=  convert(varchar(11),getdate(),120)+'08:00:00' 
+	set @endTime=  convert(varchar,getdate(),120)
+  end
+else if @hours>=2 and @hours<8
+  begin
+     set @startTime=  convert(varchar(11),getdate(),120)+'02:00:00' 
+	set @endTime=  convert(varchar,getdate(),120)
+  end
+else if @hours>=17 and @hours<=23
+ begin
+     set @startTime=  convert(varchar(11),getdate(),120)+'17:00:00' 
+	set @endTime=  convert(varchar,getdate(),120)
+ end 
+ else
+   begin
+    set @startTime=convert(varchar(11),dateadd(day,-1,getdate()),120)+'17:00:00' 
+    set @endTime=  convert(varchar,getdate(),120)
+   end
+
+--SELECT @startTime,@endTime
+
+SELECT  pen.encounterNumber,
+        pat.lifetimeNumber,
+        pin.parentId,
+        itv.propName,
+        itv.typeId,
+        itv.terseLabel AS label_t,
+        itv.displayLabel AS label_v,
+        dateadd(hh, 8, pin.chartTime) AS chartTime,
+        dateadd(hh, 8, pin.storeTime) AS storeTime,
+        pin.terseForm AS value_t,
+        pin.verboseForm AS value_v,
+        pde.terseForm AS desc_t,	
+        pde.verboseForm AS desc_v,
+        pin.userId,
+		pde.ptDescriptorId
+  FROM	CISChartingDB1.dbo.PtIntervention pin 
+          INNER JOIN CISChartingDB1.dbo.Intervention itv ON itv.interventionId = pin.interventionId
+          INNER JOIN CISChartingDB1.dbo.PtEncounter pen ON pen.ptEncounterId = pin.ptEncounterId 
+          LEFT JOIN CISChartingDB1.dbo.PtDescriptor pde ON pde.ptDescriptorId = pin.ptDescriptorId
+		  left join CISChartingDB1.dbo.PtEpisode  pte on pte.ptEpisodeId=pen.ptEpisodeId
+		  left join CISChartingDB1.dbo.Patient pat on pat.patientId=pte.patientId
+  WHERE pin.isDeleted = 0 AND pin.ptInterventionVersion = CISChartingDB1.dbo.UfnGetPtInterventionLatestVersion(pin.ptInterventionId) 
+        and pin.terseForm IS NOT NULL 
+		and itv.propName in('dripAdmIntervention','ivInfusionInt','enteralFeedingInt','IVInfusionFFInt','bloodProductInt','formularyDiscreteDoseFFInt','colloidsInt')
+		--and dateadd(hh, 8, pin.chartTime)>=@startTime and  dateadd(hh, 8, pin.chartTime)<@endTime
+		and pat.lifetimeNumber=@patientNo
+		order by pin.chartTime asc
+
+
+END
+
+
+
+GO
+
+

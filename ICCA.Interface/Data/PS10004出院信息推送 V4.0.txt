@@ -1,0 +1,34 @@
+<ESBEntry>
+   <AccessControl>
+      <UserName>HIS</UserName>
+      <Password>123456</Password>
+      <Fid>PS10004</Fid>
+      <OrderNo>PS10004S13001</OrderNo>
+      <SysFlag>1</SysFlag>
+   </AccessControl>
+   <MessageHeader>
+      <Fid>PS10004</Fid>
+      <OrderNo>PS10004S13001</OrderNo>
+      <SourceSysCode>S01</SourceSysCode>
+      <TargetSysCode>S13</TargetSysCode>
+      <HospCode>GH01</HospCode>
+      <ReturnFlag>-1</ReturnFlag>
+      <MsgDate>2022-02-28 16:04:19</MsgDate>
+   </MessageHeader>
+   <MsgInfo>
+      <Msg id="1" lastUpdate ="2022-02-28 16:04:19" action="insert">
+       			<INPATIENTDISCHARGERT>
+				<PATPATIENTID>1</PATPATIENTID>
+				<PAADMVISITNUMBER>2</PAADMVISITNUMBER>
+				<PAADMENDDATE>2022-02-21</PAADMENDDATE>
+				<PAADMENDTIME>11:29:02</PAADMENDTIME>
+				<PAADMDISDEPTCODE>ICU11</PAADMDISDEPTCODE>
+				<PAADMDISSTATUSCODE>9</PAADMDISSTATUSCODE>
+				<UPDATEUSERCODE>nurse</UPDATEUSERCODE>
+				<UPDATEUSERDESC>nurse</UPDATEUSERDESC>
+				<UPDATEDATE>2022-02-21</UPDATEDATE>
+				<UPDATETIME>11:29:09</UPDATETIME>
+			</INPATIENTDISCHARGERT>
+      </Msg>
+   </MsgInfo>
+</ESBEntry>

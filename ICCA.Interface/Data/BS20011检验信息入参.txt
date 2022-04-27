@@ -1,0 +1,29 @@
+<ESBEntry>
+        <AccessControl>
+          <SysFlag>1</SysFlag>
+          <UserName>ZZJH</UserName>
+          <Password>123456</Password>
+          <Fid>BS20011</Fid>
+          <OrderNo>BS20011S13001</OrderNo>
+        </AccessControl>
+        <MessageHeader>
+          <Fid>BS20011</Fid>
+          <OrderNo>BS20011S13001</OrderNo>
+          <SourceSysCode>S13</SourceSysCode>
+          <TargetSysCode>S00</TargetSysCode>
+          <HospCode>GH01</HospCode>
+          <MsgDate>2022-02-28 15:35:47</MsgDate>
+        </MessageHeader>
+        <RequestOption>
+          <triggerData>0</triggerData>
+          <dataAmount>500</dataAmount>
+        </RequestOption>
+        <MsgInfo flag="1" >
+          <Msg></Msg>
+          <distinct value="0"/>
+           {qeury}
+        </MsgInfo>
+        <GroupInfo flag="0">
+          <AS ID="" linkField=""/>
+        </GroupInfo>
+</ESBEntry>

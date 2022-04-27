@@ -1,0 +1,15 @@
+SELECT	pat.lifetimeNumber as PatientNo,
+        enc.encounterNumber as VisitNo,
+        ppd.terseForm AS PatientName,
+        bed.displayLabel AS Bed
+  FROM	CISPrimaryDB.dbo.Patient AS pat WITH (NOLOCK)
+          INNER JOIN CISPrimaryDB.dbo.PtEpisode AS epi WITH (NOLOCK) ON epi.patientId = pat.patientId
+            INNER JOIN CISPrimaryDB.dbo.PtEncounter AS enc WITH (NOLOCK) ON enc.ptEpisodeId = epi.ptEpisodeId
+              INNER JOIN CISPrimaryDB.dbo.PtPatientDetail as ppd WITH (NOLOCK) ON ppd.ptEncounterId = enc.ptEncounterId 
+                AND ppd.dataElementConceptId = '9F8CDAC4-96D4-4BE7-A9CC-D9B3FA7FD9B6'  
+                AND ppd.attributePropname IS NULL
+              INNER JOIN CISPrimaryDB.dbo.PtLocationStay AS loc WITH (NOLOCK) ON loc.ptEncounterId = enc.ptEncounterId
+                INNER JOIN CISPrimaryDB.dbo.ClinicalUnit as unt WITH (NOLOCK) ON unt.clinicalUnitId = loc.clinicalUnitId
+                LEFT JOIN CISPrimaryDB.dbo.Bed AS bed WITH (NOLOCK) ON bed.bedId = loc.bedId
+              INNER JOIN CISPrimaryDB.dbo.HostDb AS hos WITH (NOLOCK) ON hos.hostDbId = enc.hostDbId
+			  where lifetimeNumber is not null and endDate is null

@@ -1,0 +1,42 @@
+USE [LIS]
+GO
+
+/****** Object:  View [dbo].[v_sam_icca]    Script Date: 21/4/2022 ÏÂÎç3:14:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+
+
+Create view [dbo].[v_sam_icca]
+as
+  select 
+  a.fhz_name as PatientName,
+  a.fhz_bed as BedNo, 
+  a.fapply_time as SampleDatetime, 
+  a.fsampling_time as GetSampleDatetime,
+  a.freport_time as ReportDatetime,
+  c.fsample_type_id as SampleTypeCode,
+  c.fname as SampleTypeName,  
+  a.fjy_id as TestNo,
+  b.fitem_code as ItemCode,
+  b.fitem_name as ItemName,
+  b.fitem_unit as UnitName,
+  b.fitem_ref as Range,
+  case b.fitem_badge when '¡ü' then 1 when '¡ý' then -1 else 0 end  IsNormal,
+  b.fvalue as LisResult
+  from SAM_JY a with(nolock) join SAM_JY_RESULT b with(nolock) on a.fjy_id=b.fjy_id 
+  inner join [dbo].[SAM_SAMPLE_TYPE] c with(nolock) on c.fsample_type_id=a.fjy_yb_type
+  
+  where a.fjy_zt='ÒÑÉóºË' 
+
+
+GO
+
+

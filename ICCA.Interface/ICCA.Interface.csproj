@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2400D4B4-199B-423A-A88B-2B53FCE21C65}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ICCA.Interface</RootNamespace>
+    <AssemblyName>ICCA.Interface</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MQSDK, Version=4.4.7905.29416, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MQSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlSugar, Version=4.9.9.11, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlSugar.4.9.9.11\lib\SqlSugar.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Log\LogBasic.cs" />
+    <Compile Include="Log\LogFile.cs" />
+    <Compile Include="Log\LogInfo.cs" />
+    <Compile Include="Log\LogUtil.cs" />
+    <Compile Include="Model\OrderAdt.cs" />
+    <Compile Include="Model\LisADT.cs" />
+    <Compile Include="Model\HisPatient.cs" />
+    <Compile Include="Model\PatientADT.cs" />
+    <Compile Include="Model\TDictModel.cs" />
+    <Compile Include="Model\TMessage.cs" />
+    <Compile Include="ReadMQ.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReadMQ.Designer.cs">
+      <DependentUpon>ReadMQ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BrokerRepository.cs" />
+    <Compile Include="Repository\CalculateRepository.cs" />
+    <Compile Include="Repository\JobRepository.cs" />
+    <Compile Include="Repository\MessageRepository.cs" />
+    <Compile Include="SearchService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SearchService.Designer.cs">
+      <DependentUpon>SearchService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\Common.cs" />
+    <Compile Include="DrugService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DrugService.Designer.cs">
+      <DependentUpon>DrugService.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="SDKConfig.properties" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\BS20011检验报告入参.txt" />
+    <Content Include="Data\GetPatientDrugList.txt" />
+    <Content Include="Data\v_sam_icca.txt" />
+    <Content Include="Data\GetPatientQueue.txt" />
+    <Content Include="Data\BS20011检验报告返回结果.txt" />
+    <Content Include="Data\BS30002手术信息入参.txt" />
+    <Content Include="Data\BS30002手术信息返回结果.txt" />
+    <Content Include="Data\BS20012检验项目明细入参.txt" />
+    <Content Include="Data\BS20012检验项目明细返回结果.txt" />
+    <Content Include="Data\PS10003住院登记推送V4.0.txt" />
+    <Content Include="Data\PS10004出院信息推送 V4.0.txt" />
+    <Content Include="Data\PS10005转科转床信息推送V4.0.txt" />
+    <Content Include="Data\PS35001医嘱状态变更.txt" />
+    <Content Include="Data\PS35002医嘱信息推送V4.0.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
